@@ -29,7 +29,7 @@ namespace BlueGravity.Game.Wardrobe.View
             this.onClosePanel = onClosePanel;
 
             closeButton.onClick.AddListener(ClosePanel);
-            itemDisplayer.Initialize(GetItem);
+            itemDisplayer.Initialize(OnItemGet);
         }
 
         public void OpenPanel(List<ItemConfig> itemConfigList)
@@ -48,7 +48,7 @@ namespace BlueGravity.Game.Wardrobe.View
             onClosePanel.Invoke();
         }
 
-        private void GetItem(ItemConfig itemConfig, ItemView itemView)
+        private void OnItemGet(ItemConfig itemConfig, ItemView itemView)
         {
             itemView.Initialize(itemConfig);
             itemView.SetButtonCallback(onItemInteracted);

@@ -2,26 +2,20 @@ using System;
 using System.Collections.Generic;
 
 using UnityEngine;
-using UnityEngine.Pool;
 using UnityEngine.UI;
 
 using BlueGravity.Game.Common.Items.Config;
 using BlueGravity.Game.Shop.Items.View;
+using BlueGravity.Game.Common.Items.View;
 
 namespace BlueGravity.Game.Shop.View
 {
     public class ShopView : MonoBehaviour
     {
         #region EXPOSED_FIELDS
-        [SerializeField] private GameObject itemViewPrefab = null;
         [SerializeField] private Transform holder = null;
-        [SerializeField] private Transform itemsHolder = null;
+        [SerializeField] private ItemDisplayer itemDisplayer = null;
         [SerializeField] private Button closeButton = null;
-        #endregion
-
-        #region PRIVATE_FIELDS
-        private ObjectPool<ShopItemView> itemViewPool = null;
-        private List<ShopItemView> itemViewList = new List<ShopItemView>();
         #endregion
 
         #region ACTIONS
@@ -42,23 +36,22 @@ namespace BlueGravity.Game.Shop.View
 
             closeButton.onClick.AddListener(ClosePanel);
 
-            itemViewPool = new ObjectPool<ShopItemView>(CreateItemView, GetItemView, ReleaseItemView, DestroyItemView);
+            itemDisplayer.Initialize(OnItemGet);
         }
 
         public void OpenPanel(List<ItemConfig> itemConfigList)
         {
-            ShowItems(itemConfigList);
-
+            itemDisplayer.ShowItems(itemConfigList);
             holder.gameObject.SetActive(true);
         }
 
         public void SwitchItemBought(ItemConfig itemConfig, bool bought)
         {
-            ShopItemView itemView = itemViewList.Find(iv => iv.Id == itemConfig.Id);
+            ItemView itemView = itemDisplayer.GetItemWithId(itemConfig.Id);
 
-            if (itemView != null)
+            if (itemView != null && itemView is ShopItemView shopItemView)
             {
-                itemView.SwitchBought(bought, bought ? trySell : tryBuy);
+                shopItemView.SwitchBought(bought, bought ? trySell : tryBuy);
             }
         }
         #endregion
@@ -66,51 +59,18 @@ namespace BlueGravity.Game.Shop.View
         #region PRIVATE_METHODS
         private void ClosePanel()
         {
-            for (int i = 0; i < itemViewList.Count; i++)
-            {
-                itemViewPool.Release(itemViewList[i]);
-            }
-
-            itemViewList.Clear();
+            itemDisplayer.Clear();
 
             holder.gameObject.SetActive(false);
 
             onClosePanel.Invoke();
         }
 
-        private void ShowItems(List<ItemConfig> itemConfigList)
+        private void OnItemGet(ItemConfig itemConfig, ItemView itemView)
         {
-            for (int i = 0; i < itemConfigList.Count; i++)
-            {
-                ItemConfig itemConfig = itemConfigList[i];
-                ShopItemView item = itemViewPool.Get();
-                item.Initialize(itemConfig, playerHasItem.Invoke(itemConfig) ? trySell : tryBuy, playerHasItem.Invoke(itemConfig));
-                item.transform.SetParent(itemsHolder);
-                itemViewList.Add(item);
-            }
-        }
-        #endregion
+            ShopItemView shopItemView = itemView as ShopItemView;
 
-        #region POOL
-        private ShopItemView CreateItemView()
-        {
-            ShopItemView itemView = Instantiate(itemViewPrefab).GetComponent<ShopItemView>();
-            return itemView;
-        }
-
-        private void GetItemView(ShopItemView itemView)
-        {
-            itemView.gameObject.SetActive(true);
-        }
-
-        private void ReleaseItemView(ShopItemView itemView)
-        {
-            itemView.gameObject.SetActive(false);
-        }
-
-        private void DestroyItemView(ShopItemView itemView)
-        {
-            Destroy(itemView.gameObject);
+            shopItemView.Initialize(itemConfig, playerHasItem.Invoke(itemConfig) ? trySell : tryBuy, playerHasItem.Invoke(itemConfig));
         }
         #endregion
     }

@@ -23,6 +23,7 @@ public class ItemDisplayer : MonoBehaviour
     private Action<ItemConfig, ItemView> onGetItem = null;
     #endregion
 
+    #region PUBLIC_METHODS
     public void Initialize(Action<ItemConfig, ItemView> onGetItem)
     {
         this.onGetItem = onGetItem;
@@ -52,6 +53,12 @@ public class ItemDisplayer : MonoBehaviour
             itemViewList.Add(itemView);
         }
     }
+
+    public ItemView GetItemWithId(string id)
+    {
+        return itemViewList.Find(iv => iv.Id == id);
+    }
+    #endregion
 
     #region POOL
     private ItemView CreateItemView()
