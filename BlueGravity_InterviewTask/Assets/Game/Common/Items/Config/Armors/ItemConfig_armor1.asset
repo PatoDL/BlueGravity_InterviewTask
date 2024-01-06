@@ -10,8 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 35a1e289182692e4686f2e202a324dcd, type: 3}
-  m_Name: ItemConfig_shirt
+  m_Name: ItemConfig_armor1
   m_EditorClassIdentifier: 
-  id: shirt
-  sprite: {fileID: 0}
-  price: 5
+  id: armor1
+  displayName: Blue Armor
+  iconDisplaySprite: {fileID: -1505420609, guid: 34bc518acdf297a4aa18a8f321448e2a, type: 3}
+  iconDisplayScale: 3
+  price: 25
+  itemType: 2
+  animatorController: {fileID: 22100000, guid: f8280bf8e572f124b8551e95da186c77, type: 2}

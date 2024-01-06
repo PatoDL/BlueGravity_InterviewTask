@@ -29,8 +29,9 @@ namespace BlueGravity.Game.Common.Items.View
         public void Initialize(ItemConfig itemConfig)
         {
             id = itemConfig.Id;
-            nameText.text = itemConfig.Id;
-            iconSprite.sprite = itemConfig.Sprite;
+            nameText.text = itemConfig.DisplayName;
+            iconSprite.sprite = itemConfig.IconDisplaySprite;
+            iconSprite.transform.localScale = new Vector3(itemConfig.IconDisplayScale, itemConfig.IconDisplayScale, itemConfig.IconDisplayScale);
         }
 
         public void SetButtonCallback(Action<string> onButtonClick)

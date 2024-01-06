@@ -12,11 +12,15 @@ namespace BlueGravity.Game.Player.Controller
     {
         #region EXPOSED_FIELDS
         [SerializeField] protected float speed = 0f;
-        [SerializeField] protected KeyCode interactionKey = KeyCode.None;
-        [SerializeField] protected Rigidbody2D rigidBody2d = null;
-
-        [SerializeField] private Detector detector = null;
         [SerializeField] private float money = 0f;
+        [SerializeField] protected KeyCode interactionKey = KeyCode.None;
+
+        [SerializeField] protected Rigidbody2D rigidBody2d = null;
+        [SerializeField] private Detector detector = null;
+
+        [Header("Animations")]
+        [SerializeField] private Animator baseAnimator = null;
+        [SerializeField] private Animator[] clothesAnimators = null;
         #endregion
 
         #region PRIVATE_FIELDS
@@ -50,6 +54,8 @@ namespace BlueGravity.Game.Player.Controller
             {
                 movement = Vector2.zero;
             }
+
+            UpdateAnimators(movement);
         }
 
         private void FixedUpdate()
@@ -63,6 +69,11 @@ namespace BlueGravity.Game.Player.Controller
         {
             this.onInteract = onInteract;
             detector.Initialize(OnObjectDetected, OnObjectExited);
+        }
+
+        public List<ItemConfig> GetItems()
+        {
+            return items;
         }
 
         public bool CanBuyItem(int price)
@@ -79,12 +90,32 @@ namespace BlueGravity.Game.Player.Controller
         {
             items.Remove(itemConfig);
             money += itemConfig.Price;
+
+            if(IsitemEquipped(itemConfig))
+            {
+                UnequipItem(itemConfig);
+            }
         }
 
         public void BuyItem(ItemConfig itemConfig)
         {
             items.Add(itemConfig);
             money -= itemConfig.Price;
+        }
+
+        public void EquipItem(ItemConfig itemConfig)
+        {
+            clothesAnimators[(int)itemConfig.ItemType].runtimeAnimatorController = itemConfig.AnimatorController;
+        }
+
+        public void UnequipItem(ItemConfig itemConfig)
+        {
+            clothesAnimators[(int)itemConfig.ItemType].runtimeAnimatorController = null;
+        }
+
+        public bool IsitemEquipped(ItemConfig itemConfig)
+        {
+            return clothesAnimators[(int)itemConfig.ItemType].runtimeAnimatorController == itemConfig.AnimatorController;
         }
         #endregion
 
@@ -105,6 +136,30 @@ namespace BlueGravity.Game.Player.Controller
             {
                 onInteract.Invoke(detectedObject);
             }
+        }
+
+        private void UpdateAnimators(Vector2 movement)
+        {
+            UpdateAnimator(baseAnimator, movement);
+
+            for(int i = 0; i < clothesAnimators.Length; i++)
+            {
+                if (clothesAnimators[i].runtimeAnimatorController != null)
+                {
+                    UpdateAnimator(clothesAnimators[i], movement);
+                }
+            }
+        }
+
+        private void UpdateAnimator(Animator animator, Vector2 movement)
+        {
+            bool movingX = Mathf.Abs(movement.x) > .001f;
+            bool movingY = Mathf.Abs(movement.y) > .001f;
+
+            animator.SetBool("movingX", movingX && !movingY);
+            animator.SetBool("movingY", movingY);
+            animator.SetFloat("speedX", movement.x);
+            animator.SetFloat("speedY", movement.y);
         }
         #endregion
     }

@@ -15,3 +15,4 @@ MonoBehaviour:
   id: shorts
   sprite: {fileID: 0}
   price: 10
+  itemType: 2

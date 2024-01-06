@@ -15,3 +15,4 @@ MonoBehaviour:
   id: shoes
   sprite: {fileID: 0}
   price: 15
+  itemType: 3
