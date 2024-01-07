@@ -4,6 +4,7 @@ using BlueGravity.Game.Common.Camera;
 using BlueGravity.Game.Common.Interactable;
 
 using BlueGravity.Game.Player.Controller;
+using BlueGravity.Game.Player.InfoCanvas;
 
 using BlueGravity.Game.Shop.Controller;
 using BlueGravity.Game.Wardrobe.Controller;

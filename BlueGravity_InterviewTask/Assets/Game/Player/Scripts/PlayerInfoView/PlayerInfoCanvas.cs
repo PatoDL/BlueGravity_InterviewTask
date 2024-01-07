@@ -2,16 +2,19 @@ using UnityEngine;
 
 using TMPro;
 
-public class PlayerInfoCanvas : MonoBehaviour
+namespace BlueGravity.Game.Player.InfoCanvas
 {
-    #region EXPOSED_FIELDS
-    [SerializeField] private TMP_Text playerMoneyText = null;
-    #endregion
-
-    #region PUBLIC_METHODS
-    public void UpdateMoneyText(float moneyValue)
+    public class PlayerInfoCanvas : MonoBehaviour
     {
-        playerMoneyText.text = moneyValue.ToString();
+        #region EXPOSED_FIELDS
+        [SerializeField] private TMP_Text playerMoneyText = null;
+        #endregion
+
+        #region PUBLIC_METHODS
+        public void UpdateMoneyText(float moneyValue)
+        {
+            playerMoneyText.text = moneyValue.ToString();
+        }
+        #endregion
     }
-    #endregion
 }

@@ -4,9 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+using BlueGravity.Game.Common.UI;
 using BlueGravity.Game.Common.Items.Config;
-using BlueGravity.Game.Shop.Items.View;
 using BlueGravity.Game.Common.Items.View;
+
+using BlueGravity.Game.Shop.Items.View;
 
 namespace BlueGravity.Game.Shop.View
 {

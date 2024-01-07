@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+using BlueGravity.Game.Common.UI;
 using BlueGravity.Game.Common.Items.Config;
 using BlueGravity.Game.Common.Items.View;
 

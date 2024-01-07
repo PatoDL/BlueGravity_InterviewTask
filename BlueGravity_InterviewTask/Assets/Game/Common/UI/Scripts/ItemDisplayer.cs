@@ -7,81 +7,84 @@ using UnityEngine.Pool;
 using BlueGravity.Game.Common.Items.Config;
 using BlueGravity.Game.Common.Items.View;
 
-public class ItemDisplayer : MonoBehaviour
+namespace BlueGravity.Game.Common.UI
 {
-    #region EXPOSED_FIELDS
-    [SerializeField] private GameObject itemViewPrefab = null;
-    [SerializeField] private Transform itemsHolder = null;
-    #endregion
-
-    #region PRIVATE_FIELDS
-    private ObjectPool<ItemView> itemViewPool = null;
-    private List<ItemView> itemViewList = new List<ItemView>();
-    #endregion
-
-    #region ACTIONS
-    private Action<ItemConfig, ItemView> onGetItem = null;
-    #endregion
-
-    #region PUBLIC_METHODS
-    public void Initialize(Action<ItemConfig, ItemView> onGetItem)
+    public class ItemDisplayer : MonoBehaviour
     {
-        this.onGetItem = onGetItem;
-        itemViewPool = new ObjectPool<ItemView>(CreateItemView, GetItemView, ReleaseItemView, DestroyItemView);
-    }
+        #region EXPOSED_FIELDS
+        [SerializeField] private GameObject itemViewPrefab = null;
+        [SerializeField] private Transform itemsHolder = null;
+        #endregion
 
-    public void Clear()
-    {
-        for (int i = 0; i < itemViewList.Count; i++)
+        #region PRIVATE_FIELDS
+        private ObjectPool<ItemView> itemViewPool = null;
+        private List<ItemView> itemViewList = new List<ItemView>();
+        #endregion
+
+        #region ACTIONS
+        private Action<ItemConfig, ItemView> onGetItem = null;
+        #endregion
+
+        #region PUBLIC_METHODS
+        public void Initialize(Action<ItemConfig, ItemView> onGetItem)
         {
-            itemViewPool.Release(itemViewList[i]);
+            this.onGetItem = onGetItem;
+            itemViewPool = new ObjectPool<ItemView>(CreateItemView, GetItemView, ReleaseItemView, DestroyItemView);
         }
 
-        itemViewList.Clear();
-    }
-
-    public void ShowItems(List<ItemConfig> itemConfigList)
-    {
-        for (int i = 0; i < itemConfigList.Count; i++)
+        public void Clear()
         {
-            ItemConfig itemConfig = itemConfigList[i];
-            ItemView itemView = itemViewPool.Get();
+            for (int i = 0; i < itemViewList.Count; i++)
+            {
+                itemViewPool.Release(itemViewList[i]);
+            }
 
-            onGetItem.Invoke(itemConfig, itemView);
-
-            itemView.transform.SetParent(itemsHolder);
-            itemView.transform.SetAsLastSibling();
-
-            itemViewList.Add(itemView);
+            itemViewList.Clear();
         }
-    }
 
-    public ItemView GetItemWithId(string id)
-    {
-        return itemViewList.Find(iv => iv.Id == id);
-    }
-    #endregion
+        public void ShowItems(List<ItemConfig> itemConfigList)
+        {
+            for (int i = 0; i < itemConfigList.Count; i++)
+            {
+                ItemConfig itemConfig = itemConfigList[i];
+                ItemView itemView = itemViewPool.Get();
 
-    #region POOL
-    private ItemView CreateItemView()
-    {
-        ItemView itemView = Instantiate(itemViewPrefab).GetComponent<ItemView>();
-        return itemView;
-    }
+                onGetItem.Invoke(itemConfig, itemView);
 
-    private void GetItemView(ItemView itemView)
-    {
-        itemView.gameObject.SetActive(true);
-    }
+                itemView.transform.SetParent(itemsHolder);
+                itemView.transform.SetAsLastSibling();
 
-    private void ReleaseItemView(ItemView itemView)
-    {
-        itemView.gameObject.SetActive(false);
-    }
+                itemViewList.Add(itemView);
+            }
+        }
 
-    private void DestroyItemView(ItemView itemView)
-    {
-        Destroy(itemView.gameObject);
+        public ItemView GetItemWithId(string id)
+        {
+            return itemViewList.Find(iv => iv.Id == id);
+        }
+        #endregion
+
+        #region POOL
+        private ItemView CreateItemView()
+        {
+            ItemView itemView = Instantiate(itemViewPrefab).GetComponent<ItemView>();
+            return itemView;
+        }
+
+        private void GetItemView(ItemView itemView)
+        {
+            itemView.gameObject.SetActive(true);
+        }
+
+        private void ReleaseItemView(ItemView itemView)
+        {
+            itemView.gameObject.SetActive(false);
+        }
+
+        private void DestroyItemView(ItemView itemView)
+        {
+            Destroy(itemView.gameObject);
+        }
+        #endregion
     }
-    #endregion
 }
