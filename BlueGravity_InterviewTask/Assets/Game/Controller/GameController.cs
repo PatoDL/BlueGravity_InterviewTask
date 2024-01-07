@@ -16,6 +16,7 @@ namespace BlueGravity.Game.Controller
         [SerializeField] private PlayerController playerController = null;
         [SerializeField] private ShopController shopController = null;
         [SerializeField] private WardrobeController wardrobeController = null;
+        [SerializeField] private PlayerInfoCanvas playerInfoCanvas = null;
 
         [SerializeField] private CameraZoom cameraZoom = null;
         #endregion
@@ -23,7 +24,7 @@ namespace BlueGravity.Game.Controller
         #region UNITY_CALLS
         private void Start()
         {
-            playerController.Initialize(OnPlayerInteracted);
+            playerController.Initialize(OnPlayerInteracted, playerInfoCanvas.UpdateMoneyText);
 
             cameraZoom.Initialize();
 

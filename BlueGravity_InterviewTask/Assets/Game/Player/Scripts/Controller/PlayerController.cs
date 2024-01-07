@@ -31,6 +31,7 @@ namespace BlueGravity.Game.Player.Controller
 
         #region ACTIONS
         private Action<GameObject> onInteract = null;
+        private Action<float> onMoneyUpdate = null;
         #endregion
 
         #region PROPERTIES
@@ -65,10 +66,13 @@ namespace BlueGravity.Game.Player.Controller
         #endregion
 
         #region PUBLIC_METHODS
-        public void Initialize(Action<GameObject> onInteract)
+        public void Initialize(Action<GameObject> onInteract, Action<float> onMoneyUpdate)
         {
             this.onInteract = onInteract;
+            this.onMoneyUpdate = onMoneyUpdate;
             detector.Initialize(OnObjectDetected, OnObjectExited);
+
+            onMoneyUpdate.Invoke(money);
         }
 
         public List<ItemConfig> GetItems()
@@ -90,6 +94,7 @@ namespace BlueGravity.Game.Player.Controller
         {
             items.Remove(itemConfig);
             money += itemConfig.Price;
+            onMoneyUpdate.Invoke(money);
 
             if(IsitemEquipped(itemConfig))
             {
@@ -101,6 +106,7 @@ namespace BlueGravity.Game.Player.Controller
         {
             items.Add(itemConfig);
             money -= itemConfig.Price;
+            onMoneyUpdate.Invoke(money);
         }
 
         public void EquipItem(ItemConfig itemConfig)
