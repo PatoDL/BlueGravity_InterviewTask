@@ -50,6 +50,8 @@ public class ItemDisplayer : MonoBehaviour
             onGetItem.Invoke(itemConfig, itemView);
 
             itemView.transform.SetParent(itemsHolder);
+            itemView.transform.SetAsLastSibling();
+
             itemViewList.Add(itemView);
         }
     }
