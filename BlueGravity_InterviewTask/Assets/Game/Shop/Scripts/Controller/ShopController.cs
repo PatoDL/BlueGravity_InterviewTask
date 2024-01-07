@@ -17,6 +17,10 @@ namespace BlueGravity.Game.Shop.Controller
         [SerializeField] private ShopView shopView = null;
         #endregion
 
+        #region PROPERTIES
+        [field: SerializeField] public GameObject Sign { get; set; } = null;
+        #endregion
+
         #region ACTIONS
         private Func<int, bool> validateItemPurchase = null;
         private Func<ItemConfig, bool> playerHasItem = null;

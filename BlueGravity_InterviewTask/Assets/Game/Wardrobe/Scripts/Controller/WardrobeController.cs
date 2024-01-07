@@ -31,6 +31,7 @@ namespace BlueGravity.Game.Wardrobe.Controller
 
         #region PROPERTIES
         public float CameraZoom { get => cameraZoom; }
+        [field: SerializeField] public GameObject Sign { get; set; } = null;
         #endregion
 
         #region PUBLIC_METHODS

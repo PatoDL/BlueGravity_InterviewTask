@@ -24,16 +24,18 @@ namespace BlueGravity.Game.Common.Detector
         #region UNITY_CALLS
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if(collision.TryGetComponent<IInteractable>(out _))
+            if(collision.TryGetComponent(out IInteractable interactable))
             {
+                interactable.OnDetect();
                 onTriggerEnter.Invoke(collision.gameObject);
             }
         }
 
         private void OnTriggerExit2D(Collider2D collision)
         {
-            if (collision.TryGetComponent<IInteractable>(out _))
+            if(collision.TryGetComponent(out IInteractable interactable))
             {
+                interactable.OnUndetect();
                 onTriggerExit.Invoke(collision.gameObject);
             }
         }
