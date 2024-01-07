@@ -1,6 +1,8 @@
 using UnityEngine;
 
 using BlueGravity.Game.Common.Camera;
+using BlueGravity.Game.Common.Interactable;
+
 using BlueGravity.Game.Player.Controller;
 
 using BlueGravity.Game.Shop.Controller;
@@ -42,18 +44,21 @@ namespace BlueGravity.Game.Controller
         #region PRIVATE_METHODS
         private void OnPlayerInteracted(GameObject interactedObject)
         {
-            if (interactedObject.TryGetComponent(out ShopController shopController))
+            if (interactedObject.TryGetComponent(out IInteractable interactable))
             {
-                playerController.InputStatus = false;
-                shopController.OpenPanel();
-            }
+                if (interactable is ShopController shopController)
+                {
+                    playerController.InputStatus = false;
+                    shopController.OpenPanel();
+                }
 
-            if (interactedObject.TryGetComponent(out WardrobeController wardrobeController))
-            {
-                playerController.InputStatus = false;
-                wardrobeController.OpenPanel();
+                if (interactable is WardrobeController wardrobeController)
+                {
+                    playerController.InputStatus = false;
+                    wardrobeController.OpenPanel();
 
-                cameraZoom.SetZoom(wardrobeController.CameraZoom);
+                    cameraZoom.SetZoom(wardrobeController.CameraZoom);
+                }
             }
         }
         #endregion

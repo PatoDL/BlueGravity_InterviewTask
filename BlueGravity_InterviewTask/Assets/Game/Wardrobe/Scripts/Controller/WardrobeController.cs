@@ -3,13 +3,14 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
+using BlueGravity.Game.Common.Interactable;
 using BlueGravity.Game.Common.Items.Config;
 
 using BlueGravity.Game.Wardrobe.View;
 
 namespace BlueGravity.Game.Wardrobe.Controller
 {
-    public class WardrobeController : MonoBehaviour
+    public class WardrobeController : MonoBehaviour, IInteractable
     {
         #region EXPOSED_FIELDS
         [SerializeField] private WardrobeView wardrobeView = null;

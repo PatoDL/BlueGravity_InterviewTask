@@ -2,6 +2,8 @@ using System;
 
 using UnityEngine;
 
+using BlueGravity.Game.Common.Interactable;
+
 namespace BlueGravity.Game.Common.Detector
 {
     public class Detector : MonoBehaviour
@@ -22,12 +24,18 @@ namespace BlueGravity.Game.Common.Detector
         #region UNITY_CALLS
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            onTriggerEnter.Invoke(collision.gameObject);
+            if(collision.TryGetComponent<IInteractable>(out _))
+            {
+                onTriggerEnter.Invoke(collision.gameObject);
+            }
         }
 
         private void OnTriggerExit2D(Collider2D collision)
         {
-            onTriggerExit.Invoke(collision.gameObject);
+            if (collision.TryGetComponent<IInteractable>(out _))
+            {
+                onTriggerExit.Invoke(collision.gameObject);
+            }
         }
         #endregion
     }

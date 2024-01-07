@@ -3,12 +3,14 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
+using BlueGravity.Game.Common.Interactable;
 using BlueGravity.Game.Common.Items.Config;
+
 using BlueGravity.Game.Shop.View;
 
 namespace BlueGravity.Game.Shop.Controller
 {
-    public class ShopController : MonoBehaviour
+    public class ShopController : MonoBehaviour, IInteractable
     {
         #region EXPOSED_FIELDS
         [SerializeField] private List<ItemConfig> itemConfigList = new List<ItemConfig>();
