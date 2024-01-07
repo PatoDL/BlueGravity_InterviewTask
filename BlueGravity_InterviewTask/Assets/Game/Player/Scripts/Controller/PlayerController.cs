@@ -96,7 +96,7 @@ namespace BlueGravity.Game.Player.Controller
             money += itemConfig.Price;
             onMoneyUpdate.Invoke(money);
 
-            if(IsitemEquipped(itemConfig))
+            if(IsItemEquipped(itemConfig))
             {
                 UnequipItem(itemConfig);
             }
@@ -119,7 +119,7 @@ namespace BlueGravity.Game.Player.Controller
             clothesAnimators[(int)itemConfig.ItemType].runtimeAnimatorController = null;
         }
 
-        public bool IsitemEquipped(ItemConfig itemConfig)
+        public bool IsItemEquipped(ItemConfig itemConfig)
         {
             return clothesAnimators[(int)itemConfig.ItemType].runtimeAnimatorController == itemConfig.AnimatorController;
         }

@@ -34,7 +34,7 @@ namespace BlueGravity.Game.Controller
                     onClosePanel: () => playerController.InputStatus = true);
 
             wardrobeController.Initialize(playerController.EquipItem, playerController.UnequipItem, 
-                playerController.IsitemEquipped, playerController.GetItems,
+                playerController.IsItemEquipped, playerController.GetItems,
                 onClosePanel: () =>
                 {
                     cameraZoom.ResetZoom();
