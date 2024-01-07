@@ -1993,6 +1993,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6f1f93fd34574d04a849b9ab02f7edb1, type: 2}
   - {fileID: 11400000, guid: b7d56caaa523e184e9c466b808cb3e3c, type: 2}
   - {fileID: 11400000, guid: dadacc1417d580640a98ee69a41ec4fa, type: 2}
+  - {fileID: 11400000, guid: 6a52384593f66aa4c8c7412e4b9da61b, type: 2}
+  - {fileID: 11400000, guid: 95769d39aba2b6f4e8364dc1d879e0f1, type: 2}
   shopView: {fileID: 1647981519}
 --- !u!61 &1021168077
 BoxCollider2D:

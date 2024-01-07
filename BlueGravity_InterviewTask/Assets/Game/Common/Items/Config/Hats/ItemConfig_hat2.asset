@@ -10,9 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 35a1e289182692e4686f2e202a324dcd, type: 3}
-  m_Name: ItemConfig_shoes
+  m_Name: ItemConfig_hat2
   m_EditorClassIdentifier: 
-  id: shoes
-  sprite: {fileID: 0}
-  price: 15
-  itemType: 3
+  id: hat2
+  displayName: Orange Hat
+  iconDisplaySprite: {fileID: -1128602711, guid: a2de6a9075e794f4c9b333b44b25e51b, type: 3}
+  iconDisplayScale: 3
+  price: 20
+  itemType: 0
+  animatorController: {fileID: 22100000, guid: 08a4f97d2e9ec9b43bc92e8d04212b7d, type: 2}

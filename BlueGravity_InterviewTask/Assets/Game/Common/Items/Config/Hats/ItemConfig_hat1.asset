@@ -10,9 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 35a1e289182692e4686f2e202a324dcd, type: 3}
-  m_Name: ItemConfig_shorts
+  m_Name: ItemConfig_hat1
   m_EditorClassIdentifier: 
-  id: shorts
-  sprite: {fileID: 0}
-  price: 10
-  itemType: 2
+  id: hat1
+  displayName: White Hat
+  iconDisplaySprite: {fileID: 1078446113, guid: 81da9defc764e3b4da1dd42b01459b96, type: 3}
+  iconDisplayScale: 3
+  price: 20
+  itemType: 0
+  animatorController: {fileID: 22100000, guid: 75de2ff452710b243bc08c39426fd497, type: 2}
