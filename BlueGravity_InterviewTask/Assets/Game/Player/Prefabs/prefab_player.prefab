@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8215863826387071729}
   - component: {fileID: 8261549853658345441}
   m_Layer: 0
-  m_Name: hat
+  m_Name: spr_hat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -117,7 +117,7 @@ GameObject:
   - component: {fileID: 7973372753246410279}
   - component: {fileID: 2868743939645133145}
   m_Layer: 0
-  m_Name: sprite
+  m_Name: spr_character
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -401,7 +401,7 @@ GameObject:
   - component: {fileID: 2479505100888923793}
   - component: {fileID: 452934058585379183}
   m_Layer: 0
-  m_Name: undies
+  m_Name: spr_undies
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -506,7 +506,7 @@ GameObject:
   - component: {fileID: 233834781414418799}
   - component: {fileID: 5198164443778035431}
   m_Layer: 0
-  m_Name: armor
+  m_Name: spr_armor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
