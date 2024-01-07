@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: ItemConfig_hat2
   m_EditorClassIdentifier: 
   id: hat2
-  displayName: Orange Hat
+  displayName: Orange Hair
   iconDisplaySprite: {fileID: -1128602711, guid: a2de6a9075e794f4c9b333b44b25e51b, type: 3}
-  iconDisplayScale: 3
+  iconDisplayScale: 1.5
   price: 20
   itemType: 0
   animatorController: {fileID: 22100000, guid: 08a4f97d2e9ec9b43bc92e8d04212b7d, type: 2}

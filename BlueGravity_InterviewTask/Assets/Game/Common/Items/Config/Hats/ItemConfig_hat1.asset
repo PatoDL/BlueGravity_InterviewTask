@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: ItemConfig_hat1
   m_EditorClassIdentifier: 
   id: hat1
-  displayName: White Hat
+  displayName: White Hair
   iconDisplaySprite: {fileID: 1078446113, guid: 81da9defc764e3b4da1dd42b01459b96, type: 3}
-  iconDisplayScale: 3
+  iconDisplayScale: 1.5
   price: 20
   itemType: 0
   animatorController: {fileID: 22100000, guid: 75de2ff452710b243bc08c39426fd497, type: 2}
