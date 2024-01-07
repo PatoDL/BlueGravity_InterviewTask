@@ -41,7 +41,19 @@ namespace BlueGravity.Game.Controller
                     playerController.InputStatus = true;
                 });
         }
-        #endregion
+
+        private void Update()
+        {
+            if(Input.GetKeyDown(KeyCode.Escape))
+            {
+#if UNITY_EDITOR
+                UnityEditor.EditorApplication.ExitPlaymode();
+#else
+                Application.Quit();
+#endif
+            }
+        }
+#endregion
 
         #region PRIVATE_METHODS
         private void OnPlayerInteracted(GameObject interactedObject)
